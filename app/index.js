@@ -4,9 +4,11 @@ const cors = require('cors');
 const helmet = require('helmet');
 
 const Blockchain = require('../blockchain/index');
+const P2pServer = require('./p2p-server');
 
 const app = express();
 const bc = new Blockchain();
+const p2pServer = new P2pServer(bc);
 
 app.use(morgan('dev'));
 app.use(cors());
@@ -53,3 +55,4 @@ const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log('Listening on port', port);
 });
+p2pServer.listen();
