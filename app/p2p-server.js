@@ -1,6 +1,6 @@
 const Websocket = require('ws');
 
-const P2P_PORT = process.env.P2P_PORT || 3001;
+const P2P_PORT = process.env.P2P_PORT || 3000;
 
 const peers = process.env.PEERS ? process.env.PEERS.split(',') : [] ;//stream that contains a list of web Socan addresses
 
@@ -34,15 +34,24 @@ class P2pServer {
         
         this.messageHandler(socket);
 
-        socket.send(JSON.stringify(this.blockchain.chain));
-
+        this.sendChain(socket);
     }
 
     messageHandler(socket) {
         socket.on('message', (message) => {
             const data = JSON.parse(message);
-            console.log('data = ' , data);
+            // console.log('data = ' , data);
+
+            this.blockchain.replaceChain(data);
         });
+    }
+    
+    sendChain(socket) {
+        socket.send(JSON.stringify(this.blockchain.chain));        
+    }
+
+    syncChains() {
+        this.sockets.forEach(socket => this.sendChain(socket));
     }
 }
 
