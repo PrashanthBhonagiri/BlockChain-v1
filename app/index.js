@@ -10,9 +10,9 @@ const TransactionPool = require('../wallet/transaction-pool');
 
 const app = express();
 const bc = new Blockchain();
-const p2pServer = new P2pServer(bc);
 const wallet = new Wallet();
 const tp = new TransactionPool();
+const p2pServer = new P2pServer(bc, tp);
 
 app.use(morgan('dev'));
 app.use(cors());
