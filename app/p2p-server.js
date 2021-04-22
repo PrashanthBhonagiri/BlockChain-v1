@@ -4,7 +4,7 @@ const P2P_PORT = process.env.P2P_PORT || 3000;
 
 const peers = process.env.PEERS ? process.env.PEERS.split(',') : [] ;//stream that contains a list of web Socan addresses
 
-// PORT=5001 P2P_PORT=3003 PEERS=ws://localhost:3001,ws://localhost:3002 npm run dev
+// set PORT=5001 && set P2P_PORT=3001 && set    PEERS=ws://localhost:3000 && npm run dev
 
 const MESSAGE_TYPES = {
     chain: 'CHAIN',
@@ -47,8 +47,12 @@ class P2pServer {
         socket.on('message', (message) => {
             const data = JSON.parse(message);
             // console.log('data = ' , data);
-
-            this.blockchain.replaceChain(data);
+            if(data.type == MESSAGE_TYPES.chain) {
+                this.blockchain.replaceChain(data.chain);
+            }
+            else if(data.type == MESSAGE_TYPES.transaction){
+                this.transactionPool.updateOrAddTransaction(data.transaction);
+            }
         });
     }
     
