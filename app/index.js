@@ -49,6 +49,10 @@ app.post('/transact', (req, res) => {
     res.redirect('/transactions');
 });
 
+app.get('/public-key', (req, res) => {
+    res.json({ publicKey: wallet.publicKey });
+});
+
 function notFound(req, res, next) {
     res.status(404);
     const error = new Error(`Not Found - ${  req.originalUrl}`);
