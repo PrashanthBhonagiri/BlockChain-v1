@@ -40,8 +40,13 @@ app.post('/mine',(req,res,next) => {
 
 app.get('/transactions', (req, res) => {
     res.json(tp.transactions);
-  });
-  
+});
+
+app.post('/transact', (req, res) => {
+    const { recipient, amount } = req.body;
+    const transaction = wallet.createTransaction(recipient, amount, tp);
+    res.redirect('/transactions');
+});
 
 function notFound(req, res, next) {
     res.status(404);
