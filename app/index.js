@@ -5,10 +5,14 @@ const helmet = require('helmet');
 
 const Blockchain = require('../blockchain/index');
 const P2pServer = require('./p2p-server');
+const Wallet = require('../wallet');
+const TransactionPool = require('../wallet/transaction-pool');
 
 const app = express();
 const bc = new Blockchain();
 const p2pServer = new P2pServer(bc);
+const wallet = new Wallet();
+const tp = new TransactionPool();
 
 app.use(morgan('dev'));
 app.use(cors());
@@ -34,6 +38,10 @@ app.post('/mine',(req,res,next) => {
     res.redirect('/blocks');
 });
 
+app.get('/transactions', (req, res) => {
+    res.json(tp.transactions);
+  });
+  
 
 function notFound(req, res, next) {
     res.status(404);
