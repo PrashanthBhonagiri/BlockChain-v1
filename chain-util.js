@@ -1,5 +1,5 @@
 const EC = require('elliptic').ec;
-const {v1 : uuidV1} = require('uuid');  //for unique id absed on timestamp(v1)
+const {v1 : uuidV1} = require('uuid');  //for unique id based on timestamp(v1)
 const SHA256 = require('crypto-js/sha256');
 
 
