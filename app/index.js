@@ -46,7 +46,7 @@ app.get('/transactions', (req, res) => {
 
 app.post('/transact', (req, res) => {
     const { recipient, amount } = req.body;
-    const transaction = wallet.createTransaction(recipient, amount, tp);
+    const transaction = wallet.createTransaction(recipient, amount, bc, tp);
     
     // console.log("transaction = " , transaction);
 
