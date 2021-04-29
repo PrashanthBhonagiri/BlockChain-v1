@@ -29,15 +29,15 @@ class Blockchain {
     }
 
     replaceChain(newChain) {
-        if(newChain.length <= this.chain.length) {
-            console.log("Received chain is smaller than current chain");
-            return ;
+        if (newChain.length <= this.chain.length) {
+          console.log('Received chain is not longer than the current chain.');
+          return;
+        } else if (!this.isValidChain(newChain)) {
+          console.log('The received chain is not valid.');
+          return;
         }
-        else if (!this.isValidChain(newChain)) {
-            console.log("Received chain is not valid");
-            return;
-        }
-        console.log("Replacing clockchain with new chain");
+      
+        console.log('Replacing blockchain with the new chain.');
         this.chain = newChain;
     }
 
