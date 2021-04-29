@@ -1,6 +1,6 @@
 const ChainUtil = require('../chain-util');
 const { DIFFICULTY, MINE_RATE } = require('../config');
-
+ 
 class Block {
     constructor(timestamp, lastHash, hash, data, nonce, difficulty) {
         this.timestamp = timestamp;
@@ -23,7 +23,7 @@ class Block {
     }
 
     static genesis() {
-        return new this('Genesis time','----','First Hash',[], 0, DIFFICULTY);
+        return new this('Genesis time','----','FirstHash8888',[], 0, DIFFICULTY);
     }
 
     static mineBlock(lastBlock, data) {
@@ -37,7 +37,7 @@ class Block {
             nonce++;
             timestamp = Date.now();
             difficulty = Block.adjustDifficulty(lastBlock, timestamp);
-            hash  = this.hash(timestamp, lastHash, data, nonce, difficulty);
+            hash  = Block.hash(timestamp, lastHash, data, nonce, difficulty);
 
         } while(hash.substring(0,difficulty) !== '0'.repeat(difficulty));
 
@@ -48,7 +48,7 @@ class Block {
     }
     static blockHash(block) {
         const {timestamp, lastHash, data, nonce, difficulty} = block;
-        return this.hash(timestamp, lastHash, data, nonce, difficulty);
+        return Block.hash(timestamp, lastHash, data, nonce, difficulty);
     }
     static adjustDifficulty(lastBlock, currentTime) {
         let { difficulty } = lastBlock;
