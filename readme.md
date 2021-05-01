@@ -4,6 +4,8 @@
 
 
     set PORT=5001 && set P2P_PORT=3001 && set PEERS=ws://localhost:3000 && npm run dev
+    
+    set PORT=5002 && set P2P_PORT=3002 && set PEERS=ws://localhost:3000,ws://localhost:3001 && npm run dev
 
 ## PROOF OF WORK SYSTEM
 

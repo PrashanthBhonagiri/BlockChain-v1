@@ -23,7 +23,7 @@ class Block {
     }
 
     static genesis() {
-        return new this('Genesis time','----','FirstHash8888',[], 0, DIFFICULTY);
+        return new this('Genesis-time','I dont have any last hash','Genesis Hash',['Its me the Genesis block'], 0, DIFFICULTY);
     }
 
     static mineBlock(lastBlock, data) {
