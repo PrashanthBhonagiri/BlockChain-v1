@@ -64,6 +64,9 @@ app.get('/mine-transactions',(req,res) => {
 app.get('/public-key', (req, res) => {
     res.json({ publicKey: wallet.publicKey });
 });
+app.get('/balance', (req, res) => {
+    res.json({ Balance: wallet.balance });
+});
 
 function notFound(req, res, next) {
     res.status(404);
